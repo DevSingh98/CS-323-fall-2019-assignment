@@ -1,6 +1,6 @@
 /**
  * Running Trials
- * Author: Your Name and Carolyn Yao
+ * Author: Anthony Torres and Carolyn Yao
  * Does this compile or finish running within 5 seconds? Y/N
  */
 
@@ -9,6 +9,10 @@ public class RunningTrials {
   // Do not change the parameters!
   public int runTrialsRecur(int possibleSpeeds, int days) {
     int minTests = 0;
+    // Your code here
+    int n = possibleSpeeds;
+    int m = days;
+            // Are the speeds sorted?
     // Your code here
     return minTests;
   }
