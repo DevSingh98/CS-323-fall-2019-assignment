@@ -1,6 +1,6 @@
 /**
  * Running Trials
- * Author: Anthony Torres and Carolyn Yao
+ * Author: Anthony Torres , Deveshwar Singh, and Carolyn Yao
  * Does this compile or finish running within 5 seconds? Y/N
  *      runTrialsRecur: NO
  *      runTrialsBottomUp: YES 
@@ -63,11 +63,17 @@ public class RunningTrials {
         for (int index=1; index <= j; index++){
           minTests = Math.max( runTrials[i-1][j - index], runTrials[i-1][index-1] );
           if(minTests < max) runTrials[i][j] = minTests;
+   
         }
       }
     }
     return runTrials[days][possibleSpeeds];
   }
+
+/*   public void printSpeed(int speeds[][]){
+      String msg = "Testing Speed '" + s + "' on Day " + d + "...";
+  }     */
+
 
   public static void main(String args[]){
       RunningTrials running = new RunningTrials();
