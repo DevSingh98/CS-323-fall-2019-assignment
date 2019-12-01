@@ -1,7 +1,7 @@
 /**
  * HolidaySpecial
- * Author: Your Name and Carolyn Yao
- * Does this compile or finish running within 5 seconds? Y/N
+ * Author: Deveshwar Singh and Anthony Torres
+ * Does this compile or finish running within 5 seconds? Y/N Y
  */
 
 /**
@@ -22,24 +22,55 @@ public class HolidaySpecial {
    * @param numSteps The number of steps in the recipe, n
    * @param signUpTable An easy lookup tool, signUpTable[x][Y] = cook X signed up or did not sign up for step Y.
    *      Example:
-          signUpTable[1][3] = 1 if cook 1 signed up for Step 3
-          signUpTable[1][3] = 0 if cook 1 didn't sign up for Step 3
+  signUpTable[1][3] = 1 if cook 1 signed up for Step 3
+  signUpTable[1][3] = 0 if cook 1 didn't sign up for Step 3
    * @return scheduleTable: a table similar to the signUpTable where scheduleTable[X][Y] = 1 means
    *     cook X is assigned to step Y in an optimal schedule
    */
 
   public int[][] makeShifts(
-    int numCooks,
-    int numSteps,
-    int[][] signUpTable
+          int numCooks,
+          int numSteps,
+          int[][] signUpTable
   ) {
     // Your scheduleTable is initialized as all 0's so far. Your code will put 1's
     // in the table in the right places based on the return description
     int[][] scheduleTable = new int[numCooks + 1][numSteps + 1];
 
     // Your code here
+    int currentStep =1;
+    int prevMaxStep =0;
+    int maxStep =0;
+
+    while(currentStep <= numSteps) {
+      int backtoback=0;
+      int max = 0;// variable to help find the chef with the most back to back steps
+
+      for (int i = 1; i <= numCooks; i++) {//chef
+        int chefBackToBack = 0;
+        for (int j = prevMaxStep+1; j <= numSteps; j++) {//step
+          if (signUpTable[i][j] == 0) break; // step not back to back, so we dont consider it
+          else chefBackToBack++;
+        }
+        if (chefBackToBack > backtoback) { // chef has the most back to backs at the point
+          backtoback = chefBackToBack; // save his max num of back to backs
+          max = i;//make him be the leader in most back to backs
+        }
+      }
+      //At this point, max should hold the chef with the mod back to backs
+      //System.out.println(currentStep);
+      currentStep+= backtoback;
+      maxStep+=backtoback;
+      for(int i = prevMaxStep; i <= maxStep;i++){
+        scheduleTable[max][i] = signUpTable[max][i];
+        //System.out.println(i);
+      }
+      prevMaxStep = maxStep;
+    }
 
     return scheduleTable;
+
+
   }
 
   /**
@@ -47,8 +78,8 @@ public class HolidaySpecial {
    * @param numSteps the number of steps in the recipe
    * @param cookSignUps cook sign ups ex: {{1, 2, 4}, {3, 5}, {6, 7}}
    * @return a lookup table so if we want to know if cook x can do step y,
-      lookupTable[x][y] = 1 if cook x can do step y
-      lookupTable[x][y] = 0 if cook x cannot do step y
+  lookupTable[x][y] = 1 if cook x can do step y
+  lookupTable[x][y] = 0 if cook x cannot do step y
    */
   public int[][] makeSignUpLookup(int numSteps, int[][] cookSignUps) {
     int numCooks = cookSignUps.length;
