@@ -37,8 +37,9 @@ public class RunningTrials {
 
   // Do not change the parameters!
   public int runTrialsBottomUp(int possibleSpeeds, int days) {
-    int runTrials[][] = new int[days+1][possibleSpeeds+1];
     int minTests = 0;
+     // Your code here
+    int runTrials[][] = new int[days+1][possibleSpeeds+1];
     int max = Integer.MAX_VALUE;
     
      //Storing values for base case conditions; 1 speed left or 0 speeds left.
@@ -73,7 +74,7 @@ public class RunningTrials {
 
       // Do not touch the below lines of code, your output will automatically be formatted
       int minTrials1Recur = running.runTrialsRecur(12, 5);
-      int minTrials1Bottom = running.runTrialsBottomUp(6, 2);
+      int minTrials1Bottom = running.runTrialsBottomUp(12, 5);
       int minTrials2Recur = running.runTrialsRecur(20, 8);
       int minTrials2Bottom = running.runTrialsBottomUp(20, 8);
       System.out.println("12 speeds, 5 weeks: " + minTrials1Recur + " " + minTrials1Bottom);
