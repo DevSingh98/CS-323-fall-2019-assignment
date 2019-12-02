@@ -33,7 +33,8 @@ public class LeagueOfPatience {
     Date startTime,
     int[][] durations
   ) {
-    int[] times = new int[durations.length];
+    int numVertices = durations[0].length;
+    int[] times = new int[numVertices];
     // Your code along with comments here. Use the genericShortest function for reference.
     // You want to do similar things as the generic shortest function, except you want
     // to account for the time until the next quest time at each arrival at a location.
@@ -42,10 +43,10 @@ public class LeagueOfPatience {
     // You can also make new helper methods.
     
     //startTimes are datatype Date, make Date Array of startTimes.
-    Date[] startTimes = new Date[durations.length];
+    Date[] startTimes = new Date[numVertices];
     //First startTime for array will be given startTime
     startTimes[0] = startTime;
-    Boolean[] processed = new Boolean[durations.length];
+    Boolean[] processed = new Boolean[numVertices];
     
     
     for (int v = 0; v < numVertices; v++){
