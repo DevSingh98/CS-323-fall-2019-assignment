@@ -33,14 +33,41 @@ public class LeagueOfPatience {
     Date startTime,
     int[][] durations
   ) {
-    int[] times = new int[durations.length];
+    int numVertices = durations[0].length;
+    int[] times = new int[numVertices];
     // Your code along with comments here. Use the genericShortest function for reference.
     // You want to do similar things as the generic shortest function, except you want
     // to account for the time until the next quest time at each arrival at a location.
     // Feel free to borrow code from any of the existing methods.
     // You will find the getNextQuestTime method and the minutesBetween method helpful.
     // You can also make new helper methods.
+    
+    //startTimes are datatype Date, make Date Array of startTimes.
+    Date[] startTimes = new Date[numVertices];
+    //First startTime for array will be given startTime
+    startTimes[0] = startTime;
+    Boolean[] processed = new Boolean[numVertices];
+    
+    
+    for (int v = 0; v < numVertices; v++){
+        times[v] = Integer.MAX_VALUE;
+        processed[v] = false;
+    }
+    
 
+    times[S] = 0;
+    
+    for(int count = 0; count < numVertices - 1; count++) {
+        int u = findNextToProcess(times, processed);
+        processed[u] = true;
+        
+        for (int v=0; v < numVertices; v++){
+            if (!processed[v] && graph[u][v] != 0 && 
+            times[u] != integer.MAX_VALUE && times[u]+graph[u][v] < times[v])
+                    times[v] = times[u] + graph[u][v];
+        }
+    }
+    
     printShortestTimes(times);
 
     // Extra Credit: Code below to print the suggested play path i.e. "2, 4, 3, 5"
